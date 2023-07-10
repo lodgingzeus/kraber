@@ -1,7 +1,7 @@
 import React from 'react'
-import Sidebar from '../Sidebar/Sidebar'
-import Posts from '../Posts/Posts'
-import FriendsList from '../FriendsList/FriendsList'
+import Sidebar from '../../components/Sidebar/Sidebar'
+import Posts from '../../components/Posts/Posts'
+import FriendsList from '../../components/FriendsList/FriendsList'
 
 const HomePage = () => {
   return (
