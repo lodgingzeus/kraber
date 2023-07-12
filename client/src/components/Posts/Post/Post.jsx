@@ -18,7 +18,7 @@ const Post = () => {
             cyka blyat rush b no stop
         </div>
         <div className='h-[720px] w-full my-4 relative border-4 p-b-[100%]'>
-                <img src={ruka} alt="name" className='w-full h-full absolute object-cover object-center p-2' />
+                <img src={ichigo} alt="name" className='w-full h-full absolute object-cover object-center p-2' />
         </div>
         <div className='flex w-full m-2'>
             <div className='flex m-2'>
