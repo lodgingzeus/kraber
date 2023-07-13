@@ -3,6 +3,8 @@ import { AiFillHome, AiOutlinePlusSquare } from 'react-icons/ai'
 import { useNavigate, Link } from 'react-router-dom'
 import { CgProfile } from 'react-icons/cg'
 import { BiLogOut } from 'react-icons/bi'
+import CreatePostModal from '../../Pages/CreatePostModal/CreatePostModal'
+import SearchModal from '../../Pages/SearchModal/SearchModal'
 
 const Sidebar = () => {
 
@@ -22,9 +24,7 @@ const Sidebar = () => {
             </div>
             <div className='m-4 flex items-center gap-3'>
                 <BsSearch /> 
-                <Link to="/search">
-                    Search
-                </Link>
+                <SearchModal />
             </div>
             <div className='m-4 flex items-center gap-3'>
                 <BsFillChatHeartFill />
@@ -33,7 +33,8 @@ const Sidebar = () => {
                 </Link> 
             </div>
             <div className='m-4 flex items-center gap-3'>
-                <AiOutlinePlusSquare /> Create
+                <AiOutlinePlusSquare /> 
+                <CreatePostModal />
             </div>
             <div className='m-4 flex items-center gap-3'>
                 <CgProfile /> 

@@ -19,7 +19,7 @@ const Profile = () => {
               <div className='border-2 h-10 p-1 text-xl m-2'>
                 Username
               </div>
-              <div className='border-2 h-10 bg-slate-500 p-1 text-white m-2'>
+              <div className='border-2 h-10 btn p-1 btn-primary text-white m-2'>
                 Follow
               </div>
               <div className='border-2 h-10 bg-slate-500 p-1 text-white m-2'>

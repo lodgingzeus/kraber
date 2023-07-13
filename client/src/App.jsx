@@ -4,7 +4,7 @@ import { increment, decrement } from './store/slices/counter/counterSlice'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import HomePage from './Pages/HomePage/HomePage'
 import Profile from './Pages/Profile/Profile'
-import Search from './Pages/Search/Search'
+import Search from './Pages/SearchModal/SearchModal'
 import Conversations from './Pages/Converstaions/Conversations'
 
 const App = () => {
@@ -24,7 +24,6 @@ const App = () => {
           <Routes>
             <Route path='/' element = { <HomePage /> }/>
             <Route path='/profile/:id' element = { <Profile /> }/>
-            <Route path='/search' element = { <Search /> }/>
             <Route path='/messages' element = { <Conversations /> }/>
           </Routes>
       </BrowserRouter>
