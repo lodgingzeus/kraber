@@ -6,7 +6,7 @@ const SearchModal = () => {
     <div className="cursor-pointer" onClick={()=>window.search_modal.showModal()}>Search</div>
     <dialog id='search_modal' className='modal'>
       <div className='modal-box'>
-      <form>
+      <form method='dialog'>
         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" formMethod='dialog'>✕</button>
           <h1 className="font-bold">Search</h1>
           <div className='form-control mt-4'>

@@ -10,7 +10,11 @@ const CreatePostModal = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(descriptionRef.current.value, imageRef.current.value)
-        // window.my_modal_1.close()
+        window.create_post_modal.close()
+    }
+
+    const openDialog = () => {
+        setOpen(true)
     }
 
     const closeDialog = () => {
@@ -19,10 +23,10 @@ const CreatePostModal = () => {
 
   return (
     <div>
-    <div className="cursor-pointer" onClick={()=>window.create_post_modal.showModal()}>Create</div>
-    <dialog id="create_post_modal" className="modal">
-        <form className="modal-box">
-        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" formMethod='dialog'>✕</button>
+    <button className="cursor-pointer" onClick={()=>window.create_post_modal.showModal()}>Create</button>
+    <dialog id="create_post_modal" className={`modal`}>
+        <form method="dialog" className="modal-box" onSubmit={handleSubmit}>
+        <button type='button' className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" formMethod='dialog' onClick={()=>window.create_post_modal.close()}>✕</button>
             <h3 className="font-bold text-lg">Create new post</h3>
             <div className='form-control mt-4'>
                 <label className='label'>
@@ -37,7 +41,7 @@ const CreatePostModal = () => {
                 <input type="file" ref={imageRef} className='file-input file-input-bordered file-input-accent w-full' placeholder='Description'/>
             </div>
             <div className="modal-action">
-            <button className="btn btn-outline btn-accent modal-open" type='submit' formMethod="post" onClick={handleSubmit}>Submit</button>
+            <button className="btn btn-outline btn-accent" type='submit'>Submit</button>
             </div>
         </form>
     </dialog>
