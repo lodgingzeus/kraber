@@ -5,20 +5,10 @@ const CreatePostModal = () => {
     const descriptionRef = useRef()
     const imageRef = useRef()
 
-    const [ open, setOpen ] = useState(false)
-
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(descriptionRef.current.value, imageRef.current.value)
         window.create_post_modal.close()
-    }
-
-    const openDialog = () => {
-        setOpen(true)
-    }
-
-    const closeDialog = () => {
-        setOpen(false)
     }
 
   return (
