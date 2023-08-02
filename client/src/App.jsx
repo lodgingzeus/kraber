@@ -6,6 +6,7 @@ import HomePage from './Pages/HomePage/HomePage'
 import Profile from './Pages/Profile/Profile'
 import Search from './Pages/SearchModal/SearchModal'
 import Conversations from './Pages/Converstaions/Conversations'
+import LoginPage from './Pages/Authentication/LoginPage/LoginPage'
 
 const App = () => {
   
@@ -22,7 +23,8 @@ const App = () => {
             Subtract count
           </button> */}
           <Routes>
-            <Route path='/' element = { <HomePage /> }/>
+            <Route path='/' element = { <LoginPage /> }/>
+            <Route path='/home' element = { <HomePage /> }/>
             <Route path='/profile/:id' element = { <Profile /> }/>
             <Route path='/messages' element = { <Conversations /> }/>
           </Routes>
