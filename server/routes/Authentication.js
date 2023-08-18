@@ -12,4 +12,9 @@ router.post('/signin', async (req, res) => {
     res.json({email: email, password: password})
 })
 
+router.post('/register', (req, res) => {
+    const { email, password } = req.body
+    res.json({email: email, password: password})
+})
+
 module.exports = router
