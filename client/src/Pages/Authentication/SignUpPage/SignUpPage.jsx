@@ -1,8 +1,10 @@
 import { useRef } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import ichigo from '../../../assets/ichigo.jpg'
 
 const SignUpPage = () => {
 
+    const navigate = useNavigate()
     const emailRef = useRef()
     const passRef = useRef()
 
@@ -22,7 +24,7 @@ const SignUpPage = () => {
             })
         })
         const data = await response.json()
-
+        if(data.message) navigate('/home')
         console.log(data)
     }
 
@@ -36,19 +38,21 @@ const SignUpPage = () => {
                 <label className="label">
                     <span className="label-text text-xl">Email</span>
                 </label>
-                <input ref={emailRef} type="text" placeholder="Email" className="input input-accent input-bordered w-full max-w-xs" />
+                <input ref={emailRef} type="text" placeholder="example@gmail.com" className="input input-accent input-bordered w-full max-w-xs" />
             </div>
             <div className="form-control w-full max-w-xs">
                 <label className="label">
                     <span className="label-text text-xl">Password</span>
                 </label>
-                <input ref={passRef} type="password" placeholder="Password" className="input input-accent input-bordered w-full max-w-xs" />
+                <input ref={passRef} type="password" placeholder="*****" className="input input-accent input-bordered w-full max-w-xs" />
             </div>
-            <div className="form-control w-full max-w-xs">
-                <label className="label">
-                    <span className="label-text text-xl">Password</span>
-                </label>
+            <div className="form-control w-full max-w-xs mt-8">
                 <button className='btn btn-accent' type='submit' onClick={handleSubmit}>Sign up</button>
+            </div>
+            <div className="form-control w-full max-w-xs">
+            <label className="label">
+                <Link to={'/'} className="label-text">Already have an account? Sign in</Link>
+            </label>
             </div>
         </div>
         </div>

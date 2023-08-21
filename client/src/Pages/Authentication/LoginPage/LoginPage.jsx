@@ -1,8 +1,10 @@
 import { useRef } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import ichigo from '../../../assets/ichigo.jpg'
 
 const LoginPage = () => {
 
+    const navigate = useNavigate()
     const emailRef = useRef()
     const passRef = useRef()
 
@@ -22,7 +24,7 @@ const LoginPage = () => {
             })
         })
         const data = await response.json()
-
+        if(data.message) navigate('/home')
         console.log(data)
     }
     
@@ -36,19 +38,21 @@ const LoginPage = () => {
             <label className="label">
                 <span className="label-text text-xl">Email</span>
             </label>
-            <input ref={emailRef} type="text" placeholder="Email" className="input input-accent input-bordered w-full max-w-xs" />
+            <input ref={emailRef} type="text" placeholder="example@gmail.com" className="input input-accent input-bordered w-full max-w-xs" />
         </div>
         <div className="form-control w-full max-w-xs">
             <label className="label">
                 <span className="label-text text-xl">Password</span>
             </label>
-            <input ref={passRef} type="password" placeholder="Password" className="input input-accent input-bordered w-full max-w-xs" />
+            <input ref={passRef} type="password" placeholder="*****" className="input input-accent input-bordered w-full max-w-xs" />
         </div>
-        <div className="form-control w-full max-w-xs">
-            <label className="label">
-                <span className="label-text text-xl">Password</span>
-            </label>
+        <div className="form-control w-full max-w-xs mt-8">
             <button type='submit' className='btn btn-accent' onClick={handleSubmit}>Login</button>
+        </div>
+        <div className="form-control w-full max-w-xs">
+            <label className="label">
+                <Link to={'/signup'} className="label-text">Don't have an account? Sign up</Link>
+            </label>
         </div>
     </div>
     </div>
