@@ -1,5 +1,7 @@
 import { BsSearch, BsFillChatHeartFill } from 'react-icons/bs'
 import { AiFillHome, AiOutlinePlusSquare } from 'react-icons/ai'
+import { useDispatch } from 'react-redux'
+import { setLogout } from '../../store/slices/user/userSlice'
 import { useNavigate, Link } from 'react-router-dom'
 import { CgProfile } from 'react-icons/cg'
 import { BiLogOut } from 'react-icons/bi'
@@ -8,7 +10,14 @@ import SearchModal from '../../Pages/SearchModal/SearchModal'
 
 const Sidebar = () => {
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const handleLogOut = () => {
+        dispatch(setLogout())
+        localStorage.removeItem("token")
+        navigate("/")
+    }
 
   return (
     <div className='h-screen w-64 flex items-center overflow-auto text-lg'>
@@ -42,7 +51,7 @@ const Sidebar = () => {
                     Profile
                 </Link>
             </div>
-            <div className='m-4 flex items-center gap-3'>
+            <div onClick={handleLogOut} className='m-4 flex items-center gap-3 cursor-pointer'>
                 <BiLogOut /> Logout
             </div>
         </div>

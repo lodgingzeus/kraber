@@ -10,19 +10,9 @@ import LoginPage from './Pages/Authentication/LoginPage/LoginPage'
 import SignUpPage from './Pages/Authentication/SignUpPage/SignUpPage'
 
 const App = () => {
-  
-  const count = useSelector(state => state.counter)
-  const dispatch = useDispatch()
 
   return (
       <BrowserRouter>
-           {/* <h1 className='text-xs'>Current count is: {count}</h1>
-          <button onClick={() => dispatch(increment())}>
-            Add count
-          </button>
-          <button onClick={() => dispatch(decrement())}>
-            Subtract count
-          </button> */}
           <Routes>
             <Route path='/' element = { <LoginPage /> }/>
             <Route path='/signup' element = { <SignUpPage /> }/>

@@ -1,9 +1,12 @@
 import { useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setLogin } from '../../../store/slices/user/userSlice'
 import ichigo from '../../../assets/ichigo.jpg'
 
 const LoginPage = () => {
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const emailRef = useRef()
     const passRef = useRef()
@@ -24,7 +27,16 @@ const LoginPage = () => {
             })
         })
         const data = await response.json()
-        if(data.message) navigate('/home')
+        if(data.token) {
+            localStorage.setItem("token", data.token)
+            
+            dispatch(setLogin({
+                token: data.token,
+                user: data.user
+            }))
+
+            navigate('/home')
+        }
         console.log(data)
     }
     
