@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import FIleBase from 'react-file'
 
 const CreatePostModal = () => {
 

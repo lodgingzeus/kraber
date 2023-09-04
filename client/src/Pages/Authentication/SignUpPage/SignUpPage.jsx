@@ -7,12 +7,18 @@ const SignUpPage = () => {
     const navigate = useNavigate()
     const emailRef = useRef()
     const passRef = useRef()
+    const usernameRef = useRef()
+    const lastNameRef = useRef()
+    const firstNameRef = useRef()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const email = emailRef.current.value
         const pass = passRef.current.value
-        
+        const username = usernameRef.current.value
+        const lastName = lastNameRef.current.value
+        const firstName = firstNameRef.current.value
+
         const response = await fetch('http://localhost:8181/auth/register', {
             method: 'POST',
             headers: {
@@ -20,11 +26,14 @@ const SignUpPage = () => {
             },
             body: JSON.stringify({
                 email: email,
-                password: pass
+                password: pass,
+                username: username,
+                lastName,
+                firstName
             })
         })
         const data = await response.json()
-        if(data.message) navigate('/home')
+        if(!data.error) navigate('/home')
         console.log(data)
     }
 
@@ -34,6 +43,24 @@ const SignUpPage = () => {
         <figure><img src={ichigo} alt="Movie" className='h-[500px] w-[500px]'/></figure>
         <div className="card-body">
             <h2 className="card-title">Welcome back</h2>
+            <div className="form-control w-full max-w-xs">
+                <label className="label">
+                    <span className="label-text text-xl">Username</span>
+                </label>
+                <input ref={usernameRef} type="text" placeholder="john_doe" className="input input-accent input-bordered w-full max-w-xs" />
+            </div>
+            <div className="form-control w-full max-w-xs">
+                <label className="label">
+                    <span className="label-text text-xl">First Name</span>
+                </label>
+                <input ref={firstNameRef} type="text" placeholder="John" className="input input-accent input-bordered w-full max-w-xs" />
+            </div>
+            <div className="form-control w-full max-w-xs">
+                <label className="label">
+                    <span className="label-text text-xl">Last Name</span>
+                </label>
+                <input ref={lastNameRef} type="text" placeholder="Doe" className="input input-accent input-bordered w-full max-w-xs" />
+            </div>
             <div className="form-control w-full max-w-xs">
                 <label className="label">
                     <span className="label-text text-xl">Email</span>
