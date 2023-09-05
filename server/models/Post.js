@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const postSchema = mongoose.Schema({
+const postSchema = new mongoose.Schema({
     userId: {
         type: String,
         required: true
@@ -19,7 +19,11 @@ const postSchema = mongoose.Schema({
     likes: {
         type: Number,
         default: 0
-    }
+    },
+    createdAt: {
+        type: Date,
+        default: new Date(),
+    },
 })
 
 const Post = mongoose.model('Post', postSchema)

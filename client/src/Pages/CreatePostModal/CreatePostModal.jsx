@@ -1,14 +1,53 @@
 import { useState, useRef } from 'react'
-import FIleBase from 'react-file'
+import { useSelector } from 'react-redux'
 
 const CreatePostModal = () => {
 
-    const descriptionRef = useRef()
-    const imageRef = useRef()
+    const userId = useSelector(state => state.user._id)
+    const token = useSelector(state => state.token)
 
-    const handleSubmit = (e) => {
+    const [ postData, setPostData ] = useState({
+        description: '',
+        imageFile: ''
+    })
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(descriptionRef.current.value, imageRef.current.value)
+        const formData = new FormData()
+        formData.append("file", postData.imageFile)
+        formData.append("upload_preset", "your preset")
+        formData.append("cloud_name","your could name")
+
+        
+        const cloud_response =  await fetch('https://api.cloudinary.com/v1_1/dckmqagkz/image/upload', {
+            method: 'POST',
+            body: formData
+        })
+        const cloud_data = await cloud_response.json()
+
+        if(cloud_data.secure_url){
+
+            const newFormData = new FormData()
+            newFormData.append("userId", userId)
+            newFormData.append("description", postData.description)
+            newFormData.append("image", cloud_data.secure_url)
+
+            
+            const response = await fetch('http://localhost:8181/post/create', {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userId,
+                    description: postData.description,
+                    image: cloud_data.secure_url
+                })
+            })
+            const data = await response.json()
+            console.log(data)
+        }
         window.create_post_modal.close()
     }
 
@@ -23,13 +62,18 @@ const CreatePostModal = () => {
                 <label className='label'>
                     <span className='label-text'>Post Description</span>
                 </label>
-                <input type="text" ref={descriptionRef} className='input input-bordered w-full input-accent' placeholder='Description'/>
+                <input type="text" onChange={(e) => setPostData({ ...postData, description: e.target.value})} className='input input-bordered w-full input-accent' placeholder='Description'/>
             </div>
             <div className='form-control mt-4'>
                 <label className='label'>
                     <span className='label-text'>Upload an image</span>
                 </label>
-                <input type="file" ref={imageRef} className='file-input file-input-bordered file-input-accent w-full' placeholder='Description'/>
+                {/* <FIleBase64
+                
+                className='file-input file-input-bordered file-input-accent w-full'
+                onDone = { ({base64}) => setPostData({ ...postData, imageFile: base64})}
+                /> */}
+                <input type="file" onChange={(e) => setPostData({ ...postData, imageFile: e.target.files[0]})} className='file-input file-input-bordered file-input-accent w-full' placeholder='Description'/>
             </div>
             <div className="modal-action">
             <button className="btn btn-outline btn-accent" type='submit'>Submit</button>

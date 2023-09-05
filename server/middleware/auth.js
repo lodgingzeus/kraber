@@ -7,7 +7,7 @@ export const verifyToken = (req, res, next) => {
 
     if(authHeader) {
         const token = authHeader.split(' ')[1]
-
+        
         const verified = jwt.verify(token, process.env.JWT_SECRET_KEY)
         req.user = verified
         next()
