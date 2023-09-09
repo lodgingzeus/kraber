@@ -37,7 +37,7 @@ export const register = async (req, res) => {
     const salt = await bcrypt.genSalt()
 
     const hashedPass = await bcrypt.hash(password, salt)
-
+    
     const newUser = await User.create({
         email: email,
         password: hashedPass,
@@ -45,8 +45,10 @@ export const register = async (req, res) => {
         lastName: lastName,
         username: username
     })
+    
+    const token = jwt.sign({id: newUser._id}, process.env.JWT_SECRET_KEY)
 
-    res.status(200).json({ message: "Register successful" })
+    res.status(200).json({ newUser, token })
 
     } catch (error) {
         console.log(error)

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     user: null,
     token: null,
-    posts: [],
+    posts: []
 }
 
 export const userSlice = createSlice({
@@ -17,10 +17,12 @@ export const userSlice = createSlice({
         setLogout: (state) => {
             state.user = null
             state.token = null
+        },
+        setPosts: (state, action) => {
+            state.posts = action.payload.posts.slice(0).reverse().map(element => element)
         }
     }
-    
 })
 
-export const { setLogin, setLogout } = userSlice.actions
+export const { setLogin, setLogout, setPosts } = userSlice.actions
 export default userSlice.reducer

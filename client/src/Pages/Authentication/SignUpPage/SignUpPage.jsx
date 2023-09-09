@@ -1,9 +1,12 @@
 import { useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { setLogin } from '../../../store/slices/user/userSlice'
+import { useDispatch } from 'react-redux'
 import ichigo from '../../../assets/ichigo.jpg'
 
 const SignUpPage = () => {
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const emailRef = useRef()
     const passRef = useRef()
@@ -33,6 +36,10 @@ const SignUpPage = () => {
             })
         })
         const data = await response.json()
+        dispatch(setLogin({
+            token: data.token,
+            user: data.newUser
+        }))
         if(!data.error) navigate('/home')
         console.log(data)
     }

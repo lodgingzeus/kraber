@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 const CreatePostModal = () => {
 
-    const userId = useSelector(state => state.user._id)
+    const user = useSelector(state => state.user)
     const token = useSelector(state => state.token)
 
     const [ postData, setPostData ] = useState({
@@ -15,8 +15,8 @@ const CreatePostModal = () => {
         e.preventDefault()
         const formData = new FormData()
         formData.append("file", postData.imageFile)
-        formData.append("upload_preset", "your preset")
-        formData.append("cloud_name","your could name")
+        formData.append("upload_preset", "cvesltdr")
+        formData.append("cloud_name","dckmqagkz")
 
         
         const cloud_response =  await fetch('https://api.cloudinary.com/v1_1/dckmqagkz/image/upload', {
@@ -26,12 +26,6 @@ const CreatePostModal = () => {
         const cloud_data = await cloud_response.json()
 
         if(cloud_data.secure_url){
-
-            const newFormData = new FormData()
-            newFormData.append("userId", userId)
-            newFormData.append("description", postData.description)
-            newFormData.append("image", cloud_data.secure_url)
-
             
             const response = await fetch('http://localhost:8181/post/create', {
                 method: 'POST',
@@ -40,9 +34,10 @@ const CreatePostModal = () => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    userId,
+                    userId: user._id,
                     description: postData.description,
-                    image: cloud_data.secure_url
+                    image: cloud_data.secure_url,
+                    username: user.username
                 })
             })
             const data = await response.json()
