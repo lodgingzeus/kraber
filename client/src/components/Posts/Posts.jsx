@@ -20,6 +20,7 @@ const Posts = () => {
     dispatch(setPosts({
       posts: data
     }))
+    getPosts()
   }
 
   useEffect(() => {

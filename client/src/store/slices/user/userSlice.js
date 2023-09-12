@@ -20,9 +20,12 @@ export const userSlice = createSlice({
         },
         setPosts: (state, action) => {
             state.posts = action.payload.posts.slice(0).reverse().map(element => element)
+        },
+        setFriends: (state, action) => {
+            state.user.friends = action.payload.friendList
         }
     }
 })
 
-export const { setLogin, setLogout, setPosts } = userSlice.actions
+export const { setLogin, setLogout, setPosts, setFriends } = userSlice.actions
 export default userSlice.reducer

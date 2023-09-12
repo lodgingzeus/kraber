@@ -1,8 +1,18 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const Friends = () => {
+const Friends = ( { friend } ) => {
+
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate(`/profile/${friend}`)
+  }
+
   return (
-    <div>Friends</div>
+    <div onClick={handleClick}>
+      {friend}
+    </div>
   )
 }
 

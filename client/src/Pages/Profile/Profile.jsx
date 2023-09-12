@@ -1,9 +1,48 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import ichigo from '../../assets/ichigo.jpg'
-import Posts from '../../components/Posts/Posts'
+import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Profile = () => {
+
+  const { id } = useParams()
+  const token = useSelector(state => state.token)
+  const currentUser = useSelector(state => state.user._id)
+
+  const getUser = async () => {
+    const response = await fetch(`http://localhost:8181/users/${id}`, {
+      methond: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    const data = await response.json()
+    console.log(data)
+
+  }
+
+  const handleFollow = async () => {
+    const response = await fetch(`http://localhost:8181/users/follow/${id}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        currentUserId: currentUser
+      })
+    })
+
+    const data = await response.json()
+    console.log(data)
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [])
+
   return (
     <div className='flex'>
       <div>
@@ -19,7 +58,7 @@ const Profile = () => {
               <div className='border-2 h-10 p-1 text-xl m-2'>
                 Username
               </div>
-              <div className='border-2 h-10 btn p-1 btn-primary text-white m-2'>
+              <div className='border-2 h-10 btn p-1 btn-primary text-white m-2' onClick={handleFollow}>
                 Follow
               </div>
               <div className='border-2 h-10 bg-slate-500 p-1 text-white m-2'>

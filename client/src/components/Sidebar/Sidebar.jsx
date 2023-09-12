@@ -27,7 +27,7 @@ const Sidebar = () => {
         </div>
             <div className='m-4 flex items-center gap-3'>
                 <AiFillHome /> 
-                <Link to="/">
+                <Link to="/home">
                     Home
                 </Link>
             </div>
