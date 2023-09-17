@@ -6,10 +6,12 @@ import moment from 'moment'
 import ichigo from '../../../assets/ichigo.jpg'
 import ruka from '../../../assets/ruka.jpg'
 
-const Post = ( { postData } ) => {
+const Post = ( { postData, isProfile } ) => {
     
   return (
-    <div className='border-b-2 border-[#1fb2a6] flex flex-wrap overflow-hidden flex-col h-auto m-10'>
+    <>
+      {!isProfile && (
+        <div className='flex flex-wrap overflow-hidden flex-col h-auto m-10'>
         <div className='flex items-center w-full m-2 text-2xl'>
            <CgProfile />
            <div className='p-2'>
@@ -40,6 +42,15 @@ const Post = ( { postData } ) => {
             </div>
         </div>
     </div>
+      )}
+      {isProfile && (
+        <div className='gap-10'>
+          <div>
+              <img src={postData.image} alt="ss" className='w-96 h-96'/>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 

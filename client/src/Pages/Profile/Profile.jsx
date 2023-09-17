@@ -3,6 +3,7 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import ichigo from '../../assets/ichigo.jpg'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import Posts from '../../components/Posts/Posts'
 
 const Profile = () => {
 
@@ -19,7 +20,7 @@ const Profile = () => {
     })
 
     const data = await response.json()
-    console.log(data)
+    // console.log(data)
 
   }
 
@@ -69,29 +70,7 @@ const Profile = () => {
           <div className='flex'>
             Bio
           </div>
-        <div className='grid grid-cols-3 gap-10'>
-            <div>
-              <img src={ichigo} alt="ss" className='w-96 h-96'/>
-            </div>
-            <div>
-              <img src={ichigo} alt="ss" className='w-96 h-96'/>
-            </div>
-            <div>
-              <img src={ichigo} alt="ss" className='w-96 h-96'/>
-            </div>
-            <div>
-              <img src={ichigo} alt="ss" className='w-96 h-96'/>
-            </div>
-            <div>
-              <img src={ichigo} alt="ss" className='w-96 h-96'/>
-            </div>
-            <div>
-              <img src={ichigo} alt="ss" className='w-96 h-96'/>
-            </div>
-            <div>
-              <img src={ichigo} alt="ss" className='w-96 h-96'/>
-            </div>
-        </div>
+          <Posts isProfile={true}/>
         </div>
     </div>
   )

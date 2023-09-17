@@ -7,7 +7,7 @@ const HomePage = () => {
   return (
     <div className='flex'>
         <Sidebar />
-        <Posts />
+        <Posts isProfile={false}/>
         <FriendsList />
     </div>
   )

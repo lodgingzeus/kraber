@@ -1,16 +1,19 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { setPosts } from '../../store/slices/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import Post from './Post/Post'
+import { useParams } from 'react-router-dom'
 
-const Posts = () => {
+const Posts = ( { isProfile = false }) => {
 
+  const { id } = useParams()
   const dispatch = useDispatch()
+  const currentUser = useSelector(state => state.user.username)
   const token = useSelector(state => state.token)
   const posts = useSelector(state => state.posts)
-  
+
   const getPosts = async () => {
-    const response = await fetch('http://localhost:8181/post', {
+    const response = await fetch(`http://localhost:8181/post/feed/${currentUser}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}`}
     })
@@ -20,20 +23,38 @@ const Posts = () => {
     dispatch(setPosts({
       posts: data
     }))
-    getPosts()
+  }
+
+  
+  const getProfilePosts = async () => {
+    const response = await fetch(`http://localhost:8181/post/${id}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    const data = await response.json()
+    dispatch(setPosts({
+      posts: data
+    }))
   }
 
   useEffect(() => {
-    getPosts()
+    if(isProfile) {
+      getProfilePosts()
+    }else{
+      getPosts()
+    }
   }, [])
 
   return (
-    <div className='w-5/12 mx-56'>
-        <div className='m-10'>
+    <div className={`${!isProfile ? 'w-5/12 mx-56' : 'grid grid-cols-3 gap-10'}`}>
         {posts.map(post => (
-          <Post postData = {post} key={post._id}/>
+          <div className={`${!isProfile ? 'm-10' : ''}`}  key={post._id}>
+            <Post postData = {post} isProfile = {isProfile} />
+          </div>
         ))}
-        </div>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { BsSearch, BsFillChatHeartFill } from 'react-icons/bs'
 import { AiFillHome, AiOutlinePlusSquare } from 'react-icons/ai'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setLogout } from '../../store/slices/user/userSlice'
 import { useNavigate, Link } from 'react-router-dom'
 import { CgProfile } from 'react-icons/cg'
@@ -10,6 +10,7 @@ import SearchModal from '../../Pages/SearchModal/SearchModal'
 
 const Sidebar = () => {
 
+    const currentUser = useSelector(state => state.user.username)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -47,7 +48,7 @@ const Sidebar = () => {
             </div>
             <div className='m-4 flex items-center gap-3'>
                 <CgProfile /> 
-                <Link to="/profile/name">
+                <Link to={`/profile/${currentUser}`}>
                     Profile
                 </Link>
             </div>
