@@ -50,9 +50,9 @@ const Posts = ( { isProfile = false }) => {
 
   return (
     <div className={`${!isProfile ? 'w-5/12 mx-56' : 'grid grid-cols-3 gap-10'}`}>
-        {posts.map(post => (
+        {posts.map((post, index) => (
           <div className={`${!isProfile ? 'm-10' : ''}`}  key={post._id}>
-            <Post postData = {post} isProfile = {isProfile} />
+            <Post postData = {post} isProfile = {isProfile} index={index}/>
           </div>
         ))}
     </div>
